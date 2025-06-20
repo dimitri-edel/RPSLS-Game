@@ -1,0 +1,255 @@
+@import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@700&display=swap');
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+h1 {
+    animation: fade-in 10s;
+    text-align: center;
+    font-family: 'Orbitron', sans-serif;
+}
+
+/* Container for the home page */
+.canvas {
+    position: relative;
+    top: 0;
+    left: 0;
+    height: 1000px;
+    width: 99vw;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-image: radial-gradient(ellipse, rgb(64, 22, 143) 0%, rgb(32, 14, 96) 40%, rgb(18, 0, 34) 100%);
+    perspective: 1200px;
+}
+
+/* Button that takes user to the game page */
+#beginButton {
+    position:absolute;
+    top: 300px;
+    width: 300px;
+}
+#beginButton a {
+    position:absolute;
+    top: 0;
+    left:auto;
+    width: 300px;
+    text-align: center;
+    font-size: 40px;
+    font-weight: bold;
+    text-decoration: none;
+    color: black;
+    border: 20px solid;
+    border-image: url("../images/webp/panel-gray-border.webp") 20;
+    font-family: 'Orbitron', sans-serif;
+}
+
+#beginButton a:hover {
+    background-color: #d1d8dd;
+}
+
+#beginButton a:active {
+    background-color: #bbd1e1;
+    transform: translateY(5px);
+}
+/* The panel wioth rules of the game */
+.rules-panel {
+    position: absolute;
+    top: 400px;
+    left: auto;
+    color: white;
+    font-size: 20px;
+    font-family: 'Orbitron', sans-serif;
+    text-align: center;
+}
+
+.rules-panel ul {
+    list-style: none;
+    padding: 5px;
+}
+/* The panel with a quick manual */
+.quick-manual {
+    position: absolute;
+    top: 730px;
+    left: auto;
+    color: white;
+    font-size: 20px;
+    font-family: 'Orbitron', sans-serif;
+    text-align: center;
+}
+
+.quick-manual p {
+    padding: 5px;
+}
+
+/* 3D-Cube general settings for the container */
+.cube {
+    position: absolute;
+    top: 100px;
+    width: 200px;
+    height: 200px;
+    transform-origin: 50% 50% 100px;
+    transform-style: preserve-3d;
+    transition: all 0.5s ease-out;
+    background-color: transparent;
+    transform: rotateX(-30deg) rotateY(40deg);
+
+    animation: animate 4s linear infinite;
+}
+/* General settings for all the divs in the container */
+.cube div {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 200px;
+    height: 200px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+/* Front side , top-most layer */
+.cube .face-rock {
+    transform: translateZ(200px);
+    background-color: rgba(200, 0, 10, 0.3);
+}
+/* Front side, middle layer with the picture on it */
+.cube .pic-rock {
+    transform: translateZ(199px);
+    background-image: url("../images/webp/rock.webp");
+    background-repeat: no-repeat;
+    background-size: contain;    
+}
+/* Front side, bottom layer with a transparent white background */
+.cube .background-rock {
+    transform: translateZ(198px);
+    background-color: rgba(255, 255, 255, 0.5);
+}
+/* Right side, top-most layer */
+.cube .face-paper {
+    transform-origin: center right;
+    transform: rotateY(90deg);
+    background-color: rgba(0, 200, 0, 0.3);
+}
+/* Right side, middle layer with the picture on it */
+.cube .pic-paper {
+    transform-origin: center right;
+    transform: rotateY(90deg) translateZ(-1px);
+    background-image: url("../images/webp/paper.webp");
+    background-repeat: no-repeat;
+    /* Do not repeat the image */
+    background-size: contain;
+}
+/* Right side, bottom layer with a transparent white background */
+.cube .background-paper {
+    transform-origin: center right;
+    transform: rotateY(90deg) translateZ(-2px);
+    background-color: rgba(255, 255, 255, 0.5);
+}
+/* Left side, top-most layer */
+.cube .face-scissors {
+    transform-origin: center left;
+    transform: rotateY(-90deg);
+    background-color: rgba(18, 47, 236, 0.3);
+}
+/* Left side, middle layer with the picture on it */
+.cube .pic-scissors {
+    transform-origin: center left;
+    transform: rotateY(-90deg) translateZ(-1px);
+    background-image: url("../images/webp/scissors.webp");
+    background-repeat: no-repeat;
+    /* Do not repeat the image */
+    background-size: contain;
+}
+/* Left side, bottom layer with a transparent white background */
+.cube .background-scissors {
+    transform-origin: center left;
+    transform: rotateY(-90deg) translateZ(-2px);
+    background-color: rgba(255, 255, 255, 0.5);
+}
+/* Rear side, top-most layer */
+.cube .face-lizard {
+    transform-origin: center center;
+    transform: rotateY(180deg);
+
+    background-color: rgba(149, 236, 18, 0.3);
+}
+/* Rear side, middle layer with the picture on it */
+.cube .pic-lizard {
+    transform-origin: center center;
+    transform: rotateY(180deg) translateZ(-1px);
+
+    background-image: url("../images/webp/lizard.webp");
+    background-repeat: no-repeat;
+    /* Do not repeat the image */
+    background-size: contain;
+}
+/* Rear side, bottom layer with a transparent white background */
+.cube .background-lizard {
+    transform-origin: center center;
+    transform: rotateY(180deg) translateZ(-2px);
+    background-color: rgba(255, 255, 255, 0.5);
+}
+/* Top side, top-most layer */
+.cube .face-spock {
+    transform-origin: top center;
+    transform: rotateX(90deg);
+
+    background-color: rgba(207, 236, 18, 0.3);
+}
+/* Top side, middle layer with the picture on it */
+.cube .pic-spock {
+    transform-origin: top center;
+    transform: rotateX(90deg) translateZ(-1px);
+
+    background-image: url("../images/webp/spock.webp");
+    background-repeat: no-repeat;
+    /* Do not repeat the image */
+    background-size: contain;
+}
+/* Top side, bottom layer with a transparent white background */
+.cube .background-spock {
+    transform-origin: top center;
+    transform: rotateX(90deg) translateZ(-2px);
+    background-color: rgba(255, 255, 255, 0.6);
+}
+/* Bottom side, the glowing effect */
+.cube .glow {
+    width: 300px;
+    height: 300px;
+    transform-origin: bottom center;
+    transform: rotateX(-90deg) translateX(-50px) translateY(50px) translateZ(-50px);
+    background-color: rgba(233, 243, 53, 0.734);
+
+    border: 30px solid;
+    border-top-color: rgba(200, 0, 10, 0.7);
+    border-left-color: blue;
+    border-right-color: green;
+    border-bottom-color: yellow;
+    border-width: 30px;
+
+    filter: blur(50px);
+}
+
+/* Let the cube rotate */
+@keyframes animate {
+    0% {
+        transform: rotateX(-30deg) rotateY(0);
+    }
+
+    100% {
+        transform: rotateX(-30deg) rotateY(360deg);
+    }
+}
+/* Fade in the heading */
+@keyframes fade-in {
+    from {
+        opacity: 0.0;
+    }
+
+    to {
+        opacity: 1;
+    }
+}
