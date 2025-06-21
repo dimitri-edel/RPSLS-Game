@@ -11,6 +11,35 @@ const rules = [
     "Rock crushes scissors"
 ]
 
+outcome_images = [
+    "lizard_eats_paper.jpg",
+    "paper_covers_rock.jpg",
+    "rock_crushes_scissors.jpg",
+    "scissors_cut_paper.jpg",
+    "spock_smashes_scissors.jpg",
+    "scissors_dicapitates_lizard.jpg",
+    "lizard_poisons_spock.jpg",
+    "spock_vaporizes_rock.jpg",
+    "rock_crushes_lizard.jpg",
+    "paper_disproves_spock.jpg"
+]
+
+function getOutcomeImageFor(player, computer) {
+    // If openent picked the same pick
+    if (computer === player) {
+        return undefined;
+    }
+    for (let image of outcome_images) {
+        // Remove underscores and replace with spaces
+        const imageName = image.replace(/_/g, " ");
+        // If the image name contains both picks, return the image name
+        if (imageName.includes(player.name) && imageName.includes(computer.name)) {
+            return image;
+        }
+    }
+    return undefined;
+}
+
 // The following messages will be displayed at the top of the page. These are motivational phrases.
 const starting_message = "Welcome! May the force be with you!";
 const winning_message = "You are winning! Keep going!";
@@ -37,12 +66,15 @@ class Rock {
         }
         for (let rule of rules) {
             const ruleLower = rule.toLowerCase();
-            if (ruleLower.includes(this.name) && ruleLower.includes(oponentsPick.name)) {                
+            if (ruleLower.includes(this.name) && ruleLower.includes(oponentsPick.name)) {
                 return rule;
-            }           
+            }
         }
         return undefined;
     }
+
+
+
     // Returns one of the two picks that beat the Rock or an equal pick
     static getCheat() {
         // Assigns a random integer from 0 to 2:
@@ -76,9 +108,9 @@ class Paper {
         }
         for (let rule of rules) {
             const ruleLower = rule.toLowerCase();
-            if (ruleLower.includes(this.name) && ruleLower.includes(oponentsPick.name)) {                
+            if (ruleLower.includes(this.name) && ruleLower.includes(oponentsPick.name)) {
                 return rule;
-            }           
+            }
         }
         return undefined;
     }
@@ -110,9 +142,9 @@ class Scissors {
         }
         for (let rule of rules) {
             const ruleLower = rule.toLowerCase();
-            if (ruleLower.includes(this.name) && ruleLower.includes(oponentsPick.name)) {                
+            if (ruleLower.includes(this.name) && ruleLower.includes(oponentsPick.name)) {
                 return rule;
-            }           
+            }
         }
         return undefined;
     }
@@ -144,9 +176,9 @@ class Lizard {
         }
         for (let rule of rules) {
             const ruleLower = rule.toLowerCase();
-            if (ruleLower.includes(this.name) && ruleLower.includes(oponentsPick.name)) {                
+            if (ruleLower.includes(this.name) && ruleLower.includes(oponentsPick.name)) {
                 return rule;
-            }           
+            }
         }
         return undefined;
     }
@@ -178,9 +210,9 @@ class Spock {
         }
         for (let rule of rules) {
             const ruleLower = rule.toLowerCase();
-            if (ruleLower.includes(this.name) && ruleLower.includes(oponentsPick.name)) {                
+            if (ruleLower.includes(this.name) && ruleLower.includes(oponentsPick.name)) {
                 return rule;
-            }           
+            }
         }
         return undefined;
     }
@@ -203,7 +235,7 @@ class Player {
     }
 }
 
-class ComputerPlayer{
+class ComputerPlayer {
     static score = 0;
     static pick = null;
 
@@ -239,14 +271,14 @@ class ComputerPlayer{
 }
 /* Game contains the game logic. */
 class Game {
-    
+
     static numberOfRoundsSetting = 3; // Default setting
-        // The number of rounds left to play
+    // The number of rounds left to play
     static roundsLeft = this.numberOfRoundsSetting;
-        // The current round number
+    // The current round number
     static currentRound = 0;
     static computerPlayer = ComputerPlayer;
-    static userPlayer = Player;      
+    static userPlayer = Player;
 
     // The method is called when the user chooses their next move
     // The parameter pick is of Type Pick(Rock, Paper, Scissors, Lizard, Spock) and contains information on the option the user picked
@@ -256,29 +288,32 @@ class Game {
         this.userPlayer.pick = pick;
 
         // Now, either let the computer pick randomly or let it cheat if the round setting is higher than 3
-        if(this.numberOfRoundsSetting > 3){
+        if (this.numberOfRoundsSetting > 3) {
             // The higher the number of rounds setting, the more often the computer will cheat
             let number = 4;
-            if(this.numberOfRoundsSetting == 7){
+            if (this.numberOfRoundsSetting == 7) {
                 number = 3;
-            }else if(this.numberOfRoundsSetting == 11){
+            } else if (this.numberOfRoundsSetting == 11) {
                 number = 2;
             }
             // Every now and then the computer will cheat
-            if(this.roundsLeft % number == 0){
+            if (this.roundsLeft % number == 0) {
                 this.computerPlayer.pick = this.userPlayer.pick.getCheat();
             }
-        }else {
-            this.computerPlayer.pickRandom();        
+        } else {
+            this.computerPlayer.pickRandom();
         }
-        
+
 
 
         // Check the outcome of the move made by the player
         result = this.userPlayer.pick.checkOutcomeAgainst(this.computerPlayer.pick);
         // The corresponding message that explains the outcome
         result_message = this.userPlayer.pick.checkOutcomeMessageAgainst(this.computerPlayer.pick);
-
+        // Get the image that explains the outcome. The return value is the name of the image file
+        // that will be displayed in the outcome panel. Or undefined if the outcome is a draw.
+        // No image will be displayed in the outcome panel.
+        let outcomeImage = getOutcomeImageFor(this.userPlayer.pick, this.computerPlayer.pick);
         // Asign score
         if (result === "win") {
             this.userPlayer.increaseScore();
@@ -294,13 +329,13 @@ class Game {
         this.roundsLeft--;
         this.currentRound++;
         // Show the result of the last move to the player
-        view.displayOutComeResults(result, result_message, this.userPlayer, this.computerPlayer);
+        view.displayOutComeResults(result, result_message, outcomeImage, this.userPlayer, this.computerPlayer);
     }
 
     // Set number of rounds before game over
     static setNumberOfRounds(number) {
         // If not a number set to default
-        if(isNaN(number)){
+        if (isNaN(number)) {
             number = 5;
         }
         this.numberOfRoundsSetting = number;
@@ -326,36 +361,36 @@ class Game {
     PURPOSE:
     Separate the game logic from the presentation logic.
 */
-class View {    
-        // IDs of images whose setting need to be restored after every round
+class View {
+    // IDs of images whose setting need to be restored after every round
     static restoreComputerImageId = null;
     static restoreUserImageId = null;
-        // Copy of the HTML code of the settings-panel, so it can be reset later on
+    // Copy of the HTML code of the settings-panel, so it can be reset later on
     static initialSettingsHTML = "<label for='number-of-attempts-setting'>Number of possible attempts:</label><input id='number-of-attempts-setting' type='text'>";
 
-        // List of optionPickerIds
+    // List of optionPickerIds
     static optionPickerIds = ["user-rock-button", "user-paper-button",
-            "user-scissors-button", "user-lizard-button",
-            "user-spock-button", "computer-rock-button",
-            "computer-paper-button", "computer-scissors-button",
-            "computer-lizard-button", "computer-spock-button"
-        ];
+        "user-scissors-button", "user-lizard-button",
+        "user-spock-button", "computer-rock-button",
+        "computer-paper-button", "computer-scissors-button",
+        "computer-lizard-button", "computer-spock-button"
+    ];
 
-    
-    
+
+
 
     // Applies changes to the html document to show the outcome of the current round
-    static displayOutComeResults(outcome, outcome_message, user, computer) {
+    static displayOutComeResults(outcome, outcome_message, outcome_image, user, computer) {
 
-        let messageText = "";        
+        let messageText = "";
         this.restoreComputerImageId = "";
         this.restoreUserImageId = "";
         switch (outcome) {
             case "win":
-                messageText = "YOU WIN!";                
+                messageText = "YOU WIN!";
                 break;
             case "loss":
-                messageText = "YOU LOSE!";                
+                messageText = "YOU LOSE!";
                 break;
             case "draw":
                 messageText = "DRAW!";
@@ -365,19 +400,30 @@ class View {
         }
 
         document.getElementById("outcome-text").innerHTML = messageText;
-        document.getElementById("user-pick-image").src = "./assets/images/webp/"+game.userPlayer.pick.imageFileName;
-        document.getElementById("computer-pick-image").src = "./assets/images/webp/"+game.computerPlayer.pick.imageFileName;
         document.getElementById("message-text").innerHTML = outcome_message;
         document.getElementById("settings-panel").style = "display:none;";
         document.getElementById("rounds-counter-panel").style = "display:block;";
         document.getElementById("rounds-counter").innerHTML = game.currentRound;
-       
-        if(game.roundsLeft > 0) {
-            if(game.userPlayer.score > game.computerPlayer.score){
+
+        if (outcome_image === undefined) {
+            document.getElementById("user-pick-image").src = "./assets/images/webp/" + game.userPlayer.pick.imageFileName;
+            document.getElementById("user-pick-image").style = "display:block;";
+            document.getElementById("computer-pick-image").src = "./assets/images/webp/" + game.computerPlayer.pick.imageFileName;
+            document.getElementById("computer-pick-image").style = "display:block;";
+            document.getElementById("outcome-image").style = "display:none;";
+        } else {
+            document.getElementById("outcome-image").src = "./assets/images/" + outcome_image;
+            document.getElementById("outcome-image").style = "display:block;";
+            document.getElementById("user-pick-image").style = "display:none;";
+            document.getElementById("computer-pick-image").style = "display:none;";
+            document.getElementById("versus-text").style = "display:none;";
+        }
+        if (game.roundsLeft > 0) {
+            if (game.userPlayer.score > game.computerPlayer.score) {
                 document.getElementById("message-display").innerHTML = winning_message;
-            }else if(game.userPlayer.score < game.computerPlayer.score){
+            } else if (game.userPlayer.score < game.computerPlayer.score) {
                 document.getElementById("message-display").innerHTML = losing_message;
-            }else {
+            } else {
                 document.getElementById("message-display").innerHTML = tie_message;
             }
         }
@@ -391,13 +437,13 @@ class View {
     static displayGameOver() {
         document.getElementById("outcome-text").innerHTML = "GAME OVER!";
         let messageText = "";
-        if(game.computerPlayer.score > game.userPlayer.score){
+        if (game.computerPlayer.score > game.userPlayer.score) {
             messageText = "You have lost this game!";
             document.getElementById("message-display").innerHTML = loss_message;
-        }else if(game.computerPlayer.score < game.userPlayer.score){
+        } else if (game.computerPlayer.score < game.userPlayer.score) {
             messageText = "You have won this game!";
             document.getElementById("message-display").innerHTML = win_message;
-        }else {
+        } else {
             messageText = "This game came up a draw!";
             document.getElementById("message-display").innerHTML = draw_message;
         }
@@ -413,7 +459,10 @@ class View {
         document.getElementById("outcome-text").innerHTML = "GO!";
         document.getElementById("message-text").innerHTML = "Starting a new Game!";
         document.getElementById("user-pick-image").src = "./assets/images/webp/question.webp";
+        document.getElementById("user-pick-image").style = "display:block;";
         document.getElementById("computer-pick-image").src = "./assets/images/webp/question.webp";
+        document.getElementById("computer-pick-image").style = "display:block;";
+        document.getElementById("outcome-image").style = "display:none;";
         document.getElementById("settings-panel").style = "display:block;";
         document.getElementById("rounds-counter-panel").style = "display:none;";
     }
@@ -446,7 +495,7 @@ class View {
             "user-scissors-button", "user-lizard-button",
             "user-spock-button"
         ];
-        
+
         document.getElementById(userOptionPickerIds[0]).addEventListener("click", this.userRockOptionPickerOnClick);
 
         document.getElementById(userOptionPickerIds[1]).addEventListener("click", this.userPaperOptionPickerOnClick);

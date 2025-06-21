@@ -136,6 +136,11 @@ h1 {
     height: 100px;
 }
 
+#ouctome-image {
+    display: none;
+    width: 70%;
+    height: 70%;    
+}
 /* This element harbors the image what the computer has picked */
 #computer-pick-image-panel {
     position: relative;
