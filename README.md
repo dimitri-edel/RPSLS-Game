@@ -1,16 +1,11 @@
 ![Cover image](./assets/images/documentation/cover.webp)
 
 
-# Rock, Paper, Scissors, Lizard, Spock
-## Preparation
-I began with implementing the game logic using JavaScript. Then proceeded to designing the view elements.
+# Rock, Paper, Scissors, Lizard, Spock Version #2
+## Introduction
+The first version was written when I knew virtually nothing about JavaScript. So, I decided to go ahead and see if I can redesign it, as in simplify it.
  
 ### ISSUES
-#### PRESENTATION DESIGN
-The **first design** was **not user friendly** and the mentor did not aprove. He said it was 'not nice', even thourgh I am sure he had a very different word in mind. Here is a picture of how it looked at first
-![Image of first design](./assets/images/documentation/first_design.jpg)
-
-So I changed it to the one you will see below. This one the mentor loved. And not only was it more user friendly but also more developer friendly.
 
 #### MEDIA RESPONSIVE DESIGN
 I have tried to cover all the devices that Chrome's dev tools had to offer. Since I am on the fast track schedule there simply was not enough time to cover them all **perfectly**. So I implemented a few generic queries that cover a range of devices. The method is to divy up the devices into groups of simple dimensions. Then simply use the group's minimum required width and the minimum required height for dimensions. 
