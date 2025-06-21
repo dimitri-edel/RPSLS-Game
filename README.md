@@ -18,8 +18,68 @@ Also, I need to separate the presentation from the game logic. Hence, I created 
 
 Below you can see a simplified Class Diagram
 
-#### Simplified Class Diagram
-![Image of class diagram](./assets/images/documentation/class-diagram.webp)
+## Class Diagram
+
+```mermaid
+classDiagram
+    class Rock {
+        <<static>> imageFileName
+        <<static>> name
+        <<static>> checkOutcomeAgainst(oponentsPick)
+        <<static>> checkOutcomeMessageAgainst(oponentsPick)
+        <<static>> getCheat()
+    }
+    class Paper {
+        <<static>> imageFileName
+        <<static>> name
+        <<static>> checkOutcomeAgainst(oponentsPick)
+        <<static>> checkOutcomeMessageAgainst(oponentsPick)
+        <<static>> getCheat()
+    }
+    class Scissors {
+        <<static>> imageFileName
+        <<static>> name
+        <<static>> checkOutcomeAgainst(oponentsPick)
+        <<static>> checkOutcomeMessageAgainst(oponentsPick)
+        <<static>> getCheat()
+    }
+    class Lizard {
+        <<static>> imageFileName
+        <<static>> name
+        <<static>> checkOutcomeAgainst(oponentsPick)
+        <<static>> checkOutcomeMessageAgainst(oponentsPick)
+        <<static>> getCheat()
+    }
+    class Spock {
+        <<static>> imageFileName
+        <<static>> name
+        <<static>> checkOutcomeAgainst(oponentsPick)
+        <<static>> checkOutcomeMessageAgainst(oponentsPick)
+        <<static>> getCheat()
+    }
+    class Player {
+        <<static>> score
+        <<static>> pick
+        <<static>> increaseScore()
+    }
+    class ComputerPlayer {
+        <<static>> score
+        <<static>> pick
+        <<static>> increaseScore()
+        <<static>> pickRandom()
+    }
+    class Game {
+        <<static>> numberOfRoundsSetting
+        <<static>> roundsLeft
+        <<static>> currentRound
+        <<static>> computerPlayer
+        <<static>> userPlayer
+        <<static>> userMakesMove(pick)
+        <<static>> setNumberOfRounds(number)
+        <<static>> startOver()
+    }
+```
+
 ### GOAL
 The basic idea is to build a Rock, Paper, Scissors, Lizard, Spock Game
 #### External user’s goal
@@ -114,7 +174,7 @@ The site has been deployed from GitHub Pages. The way to do that was to go to th
 ### JavaScript Coding
 - Code Institute tutorials for Basic JavaScript
 - w3schools as a tutorial on OOD JavaScript
-- Stackoverflow.com for some advanced tecchniques in JavaScript
+- Stackoverflow.com for some advanced tecchiques in JavaScript
 
 ### MEDIA
 - restart icon - free icons png
