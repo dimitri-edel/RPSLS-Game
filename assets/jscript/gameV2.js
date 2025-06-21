@@ -29,8 +29,7 @@ class Rock {
             const ruleLower = rule.toLowerCase();
             if (ruleLower.includes(this.name) && ruleLower.includes(oponentsPick.name)) {                
                 return rule;
-            }
-            console.log("Checking rule: " + ruleLower);
+            }           
         }
         return undefined;
     }
@@ -176,9 +175,49 @@ class Spock {
     }
 }
 
+// Player contains information on the player, such as the score and the current pick
+class Player {
+    static score = 0;
+    static pick = none;
+
+    // Increases the current score by 1
+    static increaseScore() {
+        this.score++;
+    }
+}
+
+class ComputerPlayer extends Player {
+    // Computer picks a random move
+    // Pick a ramdom move for the player. Used for the computer player.
+    static pickRandom() {
+        // Assigns a random integer from 0 to 4:
+        let number = Math.floor(Math.random() * 5);
+        switch (number) {
+            case 0:
+                this.pick = Rock;
+                break;
+            case 1:
+                this.pick = Paper;
+                break;
+            case 2:
+                this.pick = Scissors;
+                break;
+            case 3:
+                this.pick = Lizard;
+                break;
+            case 4:
+                this.pick = Spock;
+                break;
+            default:
+                this.pick = Rock;
+        }
+    }
+}
+
+
 function testAPick() {
     let pick = Rock;
-    let oponentsPick = Paper;
+    let oponentsPick = Scissors;
     pick.checkOutcomeAgainst(oponentsPick);
     let outcomeMessage = pick.checkOutcomeMessageAgainst(oponentsPick);
     console.log(outcomeMessage);
