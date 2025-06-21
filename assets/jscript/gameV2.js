@@ -80,6 +80,102 @@ class Paper {
     }
 }
 
+class Scissors {
+    static image = "scissors.webp";
+    static name = "scissors";
+    static checkOutcomeAgainst(oponentsPick) {
+        let wins_against = [Paper, Lizard];
+        if (wins_against.includes(oponentsPick)) {
+            return "win";
+        } else if (oponentsPick === this) {
+            return "draw";
+        } else {
+            return "loss";
+        }
+    }
+
+    static checkOutcomeMessageAgainst(oponentsPick) {
+        if (oponentsPick === this) {
+            return "It's a draw! You both picked Scissors.";
+        }
+        rules.forEach((rule) => {
+            if (rule.toLowerCase().includes(this.name) && rule.toLowerCase().includes(oponentsPick.name)) {
+                return rule;
+            }
+        });
+    }
+
+    static getCheat() {
+        let number = Math.floor(Math.random() * 3);
+        let arr = [Paper, Lizard, Scissors];
+        return arr[number];
+    }
+}
+
+class Lizard {
+    static image = "lizard.webp";
+    static name = "lizard";
+    static checkOutcomeAgainst(oponentsPick) {
+        let wins_against = [Spock, Paper];
+        if (wins_against.includes(oponentsPick)) {
+            return "win";
+        } else if (oponentsPick === this) {
+            return "draw";
+        } else {
+            return "loss";
+        }
+    }
+
+    static checkOutcomeMessageAgainst(oponentsPick) {
+        if (oponentsPick === this) {
+            return "It's a draw! You both picked Lizard.";
+        }
+        rules.forEach((rule) => {
+            if (rule.toLowerCase().includes(this.name) && rule.toLowerCase().includes(oponentsPick.name)) {
+                return rule;
+            }
+        });
+    }
+
+    static getCheat() {
+        let number = Math.floor(Math.random() * 3);
+        let arr = [Spock, Scissors, Lizard];
+        return arr[number];
+    }
+}
+
+class Spock {
+    static image = "spock.webp";
+    static name = "spock";
+    static checkOutcomeAgainst(oponentsPick) {
+        let wins_against = [Scissors, Rock];
+        if (wins_against.includes(oponentsPick)) {
+            return "win";
+        } else if (oponentsPick === this) {
+            return "draw";
+        } else {
+            return "loss";
+        }
+    }
+
+    static checkOutcomeMessageAgainst(oponentsPick) {
+        if (oponentsPick === this) {
+            return "It's a draw! You both picked Spock.";
+        }
+        rules.forEach((rule) => {
+            if (rule.toLowerCase().includes(this.name) && rule.toLowerCase().includes(oponentsPick.name)) {
+                return rule;
+            }
+        });
+    }
+
+    static getCheat() {
+        let number = Math.floor(Math.random() * 3);
+        let arr = [Scissors, Rock, Spock];
+        return arr[number];
+    }
+}
+
 function testAPick() {
     let pick = Rock;
     let oponentsPick = Paper;
