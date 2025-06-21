@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="keywords" content="game, rock paper scissors lizard spock, free online game">
+    <meta name="description" content="free online game of rock paper scissors lizard spock">
+    <meta name="author" content="Dimitri Edel">
+    <title>Game - Rock, Paper, Scissors, Lizzard, Spock</title>
+
+
+    <link rel="stylesheet" href="./assets/css/game.css">
+</head>
+
+<body>
+    <header>
+        <div id="header-message">
+            <h1 id="message-display">message</h1>
+        </div>
+    </header>
+    <div id="canvas">
+        <div id="first-row">
+            <div id="computer-score">0</div>
+            <div id="settings-panel">
+                <label for="rounds">Choose number of rounds:<br></label>
+                <select name="rounds" id="rounds" onchange="game.setNumberOfRounds(this.value)" aria-label="select number of rounds here">
+                    <option value="3" >3</option>
+                    <option value="5">5</option>
+                    <option value="7">7</option>
+                    <option value="11">11</option>
+                </select>
+            </div>
+            <div id="rounds-counter-panel">
+                <div id="rounds-counter-text">ROUND</div>
+                <div id="rounds-counter">0</div>
+            </div>
+            <div id="user-score">0</div>
+        </div>
+        <div id="second-row">
+            <div id="outcome-text"></div>
+        </div>
+        <div id="third-row">
+            <div id="computer-pick-image-panel"><img id="computer-pick-image" alt="image question mark"
+                    src="./assets/images/webp/question.webp"></div>
+            <div id="versus-text">VS.</div>
+            <div id="user-pick-image-panel"><img id="user-pick-image" alt="image question mark"
+                    src="./assets/images/webp/question.webp"></div>
+        </div>
+        <div id="fourth-row">
+            <div id="message-text"></div>
+        </div>
+        <div id="fifth-row">
+            <div id="restart-button" onclick="view.startOverOnClick();">
+                <img alt="image question mark" src="./assets/images/webp/restart.webp">
+            </div>
+            <div id="home-button" onclick="view.homeButtonOnClick();">
+                <img alt="image question mark" src="./assets/images/webp/home.webp">
+            </div>
+        </div>
+
+        <!-- Inside this div live the buttons user can click to play the game -->
+        <div id="user-option-panel" class="gray-border">
+            <div id="user-rock-button" class="player-option-picker">
+                <img id="user-rock-button-image" src="./assets/images/webp/rock.webp" alt="image of a rock">
+                <img id="user-rock-button-image-gray" alt="image gray button"
+                    src="./assets/images/webp/button-gray.webp">
+            </div>
+            <div id="user-paper-button" class="player-option-picker">
+                <img id="user-paper-button-image" src="./assets/images/webp/paper.webp" alt="image of a sheet of paper">
+                <img id="user-paper-button-image-gray" alt="image gray button"
+                    src="./assets/images/webp/button-gray.webp">
+            </div>
+            <div id="user-scissors-button" class="player-option-picker">
+                <img id="user-scissors-button-image" alt="image of scissors" src="./assets/images/webp/scissors.webp">
+                <img id="user-scissors-button-image-gray" alt="image gray button"
+                    src="./assets/images/webp/button-gray.webp">
+            </div>
+            <div id="user-lizard-button" class="player-option-picker">
+                <img id="user-lizard-button-image" alt="image of lizard" src="./assets/images/webp/lizard.webp">
+                <img id="user-lizard-button-image-gray" alt="image gray button"
+                    src="./assets/images/webp/button-gray.webp">
+            </div>
+            <div id="user-spock-button" class="player-option-picker">
+                <img id="user-spock-button-image" alt="image of spock" src="./assets/images/webp/spock.webp">
+                <img id="user-spock-button-image-gray" alt="image gray button"
+                    src="./assets/images/webp/button-gray.webp">
+            </div>
+        </div>
+    </div>
+    <script src="./assets/jscript/gameV2.js"></script>
+</body>
+
+</html>
