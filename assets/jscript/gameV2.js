@@ -213,7 +213,87 @@ class ComputerPlayer extends Player {
         }
     }
 }
+/* Game contains the game logic. */
+class Game {
+    
+    static numberOfRoundsSetting = 3; // Default setting
+        // The number of rounds left to play
+    static roundsLeft = this.numberOfRoundsSetting;
+        // The current round number
+    static currentRound = 0;
+    static computerPlayer = ComputerPlayer;
+    static userPlayer = Player;      
 
+    // The method is called when the user chooses their next move
+    // The parameter pick is of Type Pick(Rock, Paper, Scissors, Lizard, Spock) and contains information on the option the user picked
+    static userMakesMove(pick) {
+        let result = "";
+        let result_message = "";
+        this.userPlayer.currentPick = pick;
+
+        // Now, either let the computer pick randomly or let it cheat if the round setting is higher than 3
+        if(this.numberOfRoundsSetting > 3){
+            // The higher the number of rounds setting, the more often the computer will cheat
+            let number = 4;
+            if(this.numberOfRoundsSetting == 7){
+                number = 3;
+            }else if(this.numberOfRoundsSetting == 11){
+                number = 2;
+            }
+            // Every now and then the computer will cheat
+            if(this.roundsLeft % number == 0){
+                this.computerPlayer.currentPick = this.userPlayer.currentPick.getCheat();
+            }
+        }else {
+            this.computerPlayer.pickRandom();        
+        }
+        
+
+
+        // Check the outcome of the move made by the player
+        result = this.userPlayer.currentPick.checkOutcomeAgainst(this.computerPlayer.currentPick);
+        // The corresponding message that explains the outcome
+        result_message = this.userPlayer.currentPick.checkOutcomeMessageAgainst(this.computerPlayer.currentPick);
+
+        // Asign score
+        if (result == win) {
+            this.userPlayer.increaseScore();
+        } else if (result == loss) {
+            this.computerPlayer.increaseScore();
+        } else if (result == draw) {
+            this.userPlayer.increaseScore();
+            this.computerPlayer.increaseScore();
+        }
+        // Transfer the score to the scoreboard
+        view.updateScore(this.userPlayer, this.computerPlayer);
+        // Count down the rounds
+        this.roundsLeft--;
+        this.currentRound++;
+        // Show the result of the last move to the player
+        view.displayOutComeResults(result, result_message, this.userPlayer, this.computerPlayer);
+    }
+
+    // Set number of rounds before game over
+    static setNumberOfRounds(number) {
+        // If not a number set to default
+        if(isNaN(number)){
+            number = 5;
+        }
+        this.numberOfRoundsSetting = number;
+        this.roundsLeft = number;
+    }
+
+    // Resets the game 
+    static startOver() {
+        this.roundsLeft = this.numberOfRoundsSetting;
+        this.computerPlayer.currentScore = 0;
+        this.userPlayer.currentScore = 0;
+        this.currentRound = 0;
+
+        // view.displayStartWindow(this.userPlayer, this.computerPlayer);
+        view.updateScore(this.userPlayer, this.computerPlayer);
+    }
+}
 
 function testAPick() {
     let pick = Rock;
