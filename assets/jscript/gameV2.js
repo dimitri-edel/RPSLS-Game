@@ -74,12 +74,13 @@ class Paper {
         if (oponentsPick === this) {
             return "It's a draw! You both picked Paper.";
         }
-        // Return the message that explains the outcome
-        rules.forEach((rule) => {
-            if (rule.toLowerCase().includes(this.name) && rule.toLowerCase().includes(oponentsPick.name)) {
+        for (let rule of rules) {
+            const ruleLower = rule.toLowerCase();
+            if (ruleLower.includes(this.name) && ruleLower.includes(oponentsPick.name)) {                
                 return rule;
-            }
-        });
+            }           
+        }
+        return undefined;
     }
 
     static getCheat() {
@@ -107,11 +108,13 @@ class Scissors {
         if (oponentsPick === this) {
             return "It's a draw! You both picked Scissors.";
         }
-        rules.forEach((rule) => {
-            if (rule.toLowerCase().includes(this.name) && rule.toLowerCase().includes(oponentsPick.name)) {
+        for (let rule of rules) {
+            const ruleLower = rule.toLowerCase();
+            if (ruleLower.includes(this.name) && ruleLower.includes(oponentsPick.name)) {                
                 return rule;
-            }
-        });
+            }           
+        }
+        return undefined;
     }
 
     static getCheat() {
@@ -139,11 +142,13 @@ class Lizard {
         if (oponentsPick === this) {
             return "It's a draw! You both picked Lizard.";
         }
-        rules.forEach((rule) => {
-            if (rule.toLowerCase().includes(this.name) && rule.toLowerCase().includes(oponentsPick.name)) {
+        for (let rule of rules) {
+            const ruleLower = rule.toLowerCase();
+            if (ruleLower.includes(this.name) && ruleLower.includes(oponentsPick.name)) {                
                 return rule;
-            }
-        });
+            }           
+        }
+        return undefined;
     }
 
     static getCheat() {
@@ -171,11 +176,13 @@ class Spock {
         if (oponentsPick === this) {
             return "It's a draw! You both picked Spock.";
         }
-        rules.forEach((rule) => {
-            if (rule.toLowerCase().includes(this.name) && rule.toLowerCase().includes(oponentsPick.name)) {
+        for (let rule of rules) {
+            const ruleLower = rule.toLowerCase();
+            if (ruleLower.includes(this.name) && ruleLower.includes(oponentsPick.name)) {                
                 return rule;
-            }
-        });
+            }           
+        }
+        return undefined;
     }
 
     static getCheat() {
@@ -246,7 +253,7 @@ class Game {
     static userMakesMove(pick) {
         let result = "";
         let result_message = "";
-        this.userPlayer.currentPick = pick;
+        this.userPlayer.pick = pick;
 
         // Now, either let the computer pick randomly or let it cheat if the round setting is higher than 3
         if(this.numberOfRoundsSetting > 3){
@@ -259,7 +266,7 @@ class Game {
             }
             // Every now and then the computer will cheat
             if(this.roundsLeft % number == 0){
-                this.computerPlayer.currentPick = this.userPlayer.currentPick.getCheat();
+                this.computerPlayer.pick = this.userPlayer.pick.getCheat();
             }
         }else {
             this.computerPlayer.pickRandom();        
@@ -268,9 +275,9 @@ class Game {
 
 
         // Check the outcome of the move made by the player
-        result = this.userPlayer.currentPick.checkOutcomeAgainst(this.computerPlayer.currentPick);
+        result = this.userPlayer.pick.checkOutcomeAgainst(this.computerPlayer.pick);
         // The corresponding message that explains the outcome
-        result_message = this.userPlayer.currentPick.checkOutcomeMessageAgainst(this.computerPlayer.currentPick);
+        result_message = this.userPlayer.pick.checkOutcomeMessageAgainst(this.computerPlayer.pick);
 
         // Asign score
         if (result === "win") {
@@ -303,8 +310,8 @@ class Game {
     // Resets the game 
     static startOver() {
         this.roundsLeft = this.numberOfRoundsSetting;
-        this.computerPlayer.currentScore = 0;
-        this.userPlayer.currentScore = 0;
+        this.computerPlayer.score = 0;
+        this.userPlayer.score = 0;
         this.currentRound = 0;
 
         // view.displayStartWindow(this.userPlayer, this.computerPlayer);
@@ -358,8 +365,8 @@ class View {
         }
 
         document.getElementById("outcome-text").innerHTML = messageText;
-        document.getElementById("user-pick-image").src = "./assets/images/webp/"+game.userPlayer.currentPick.imageFileName;
-        document.getElementById("computer-pick-image").src = "./assets/images/webp/"+game.computerPlayer.currentPick.imageFileName;
+        document.getElementById("user-pick-image").src = "./assets/images/webp/"+game.userPlayer.pick.imageFileName;
+        document.getElementById("computer-pick-image").src = "./assets/images/webp/"+game.computerPlayer.pick.imageFileName;
         document.getElementById("message-text").innerHTML = outcome_message;
         document.getElementById("settings-panel").style = "display:none;";
         document.getElementById("rounds-counter-panel").style = "display:block;";
