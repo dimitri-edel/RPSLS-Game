@@ -78,6 +78,25 @@ classDiagram
         <<static>> setNumberOfRounds(number)
         <<static>> startOver()
     }
+    class View {
+        <<static>> displayOutComeResults()
+        <<static>> displayGameOver()
+        <<static>> startOverOnClick()
+        <<static>> homeButtonOnClick()
+        <<static>> clearOptionPickerEventListeners()
+        <<static>> hookUpOptionPickerEventListeners()
+        <<static>> updateScore()
+        <<static>> getNumberOfRoundsSetting()
+    }
+    Game --> Player : uses
+    Game --> ComputerPlayer : uses
+    Game --> View : uses
+    View --> Game : calls methods
+    Player <.. Rock : uses
+    Player <.. Paper : uses
+    Player <.. Scissors : uses
+    Player <.. Lizard : uses
+    Player <.. Spock : uses
 ```
 
 ### GOAL
