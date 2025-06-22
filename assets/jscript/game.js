@@ -56,7 +56,14 @@ class Rock {
     // Checks the outcome of playing it against Paper, Scissorrs, etc.
     // If Rock wins the return value is "win" else "loss" or "draw"
     static checkOutcomeAgainst(oponentsPick) {
-        console.log("Checking outcome of " + this.name + " against " + oponentsPick.name);
+        let wins_against = [Scissors, Lizard];
+        if (wins_against.includes(oponentsPick)) {
+            return "win";
+        } else if (oponentsPick === this) {
+            return "draw";
+        } else {
+            return "loss";
+        }
     }
     /* Returns the corresponding message, which explains the outcome, like "lirrad eats paper!" */
     static checkOutcomeMessageAgainst(oponentsPick) {
@@ -411,6 +418,7 @@ class View {
             document.getElementById("computer-pick-image").src = "./assets/images/webp/" + game.computerPlayer.pick.imageFileName;
             document.getElementById("computer-pick-image").style = "display:block;";
             document.getElementById("outcome-image").style = "display:none;";
+            document.getElementById("versus-text").style = "display:block;";
         } else {
             document.getElementById("outcome-image").src = "./assets/images/" + outcome_image;
             document.getElementById("outcome-image").style = "display:block;";
@@ -465,6 +473,7 @@ class View {
         document.getElementById("outcome-image").style = "display:none;";
         document.getElementById("settings-panel").style = "display:block;";
         document.getElementById("rounds-counter-panel").style = "display:none;";
+        document.getElementById("versus-text").style = "display:block;";
     }
 
     // Is triggered when the 'home' icon is clicked
