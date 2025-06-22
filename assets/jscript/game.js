@@ -24,6 +24,39 @@ outcome_images = [
     "paper_disproves_spock.jpg"
 ]
 
+class GameResult {
+    static getOutcomeImageFor(player, computer) {
+        // If openent picked the same pick
+        if (computer === player) {
+            return undefined;
+        }
+        for (let image of outcome_images) {
+            // Remove underscores and replace with spaces
+            const imageName = image.replace(/_/g, " ");
+            // If the image name contains both picks, return the image name
+            if (imageName.includes(player.name) && imageName.includes(computer.name)) {
+                return image;
+            }
+        }
+        return undefined;
+    }
+
+    /* Returns the corresponding message, which explains the outcome, like "lirrad eats paper!" */
+    static checkOutcomeMessageAgainst(player, computer) {
+        // If openent picked the same pick
+        if (computer === player) {
+            return "It's a draw! You both picked Rock.";
+        }
+        for (let rule of rules) {
+            const ruleLower = rule.toLowerCase();
+            if (ruleLower.includes(player.name) && ruleLower.includes(computer.name)) {
+                return rule;
+            }
+        }
+        return undefined;
+    }
+}
+
 function getOutcomeImageFor(player, computer) {
     // If openent picked the same pick
     if (computer === player) {
@@ -65,23 +98,7 @@ class Rock {
             return "loss";
         }
     }
-    /* Returns the corresponding message, which explains the outcome, like "lirrad eats paper!" */
-    static checkOutcomeMessageAgainst(oponentsPick) {
-        // If openent picked the same pick
-        if (oponentsPick === this) {
-            return "It's a draw! You both picked Rock.";
-        }
-        for (let rule of rules) {
-            const ruleLower = rule.toLowerCase();
-            if (ruleLower.includes(this.name) && ruleLower.includes(oponentsPick.name)) {
-                return rule;
-            }
-        }
-        return undefined;
-    }
-
-
-
+    
     // Returns one of the two picks that beat the Rock or an equal pick
     static getCheat() {
         // Assigns a random integer from 0 to 2:
@@ -109,19 +126,6 @@ class Paper {
         }
     }
 
-    static checkOutcomeMessageAgainst(oponentsPick) {
-        if (oponentsPick === this) {
-            return "It's a draw! You both picked Paper.";
-        }
-        for (let rule of rules) {
-            const ruleLower = rule.toLowerCase();
-            if (ruleLower.includes(this.name) && ruleLower.includes(oponentsPick.name)) {
-                return rule;
-            }
-        }
-        return undefined;
-    }
-
     static getCheat() {
         let number = Math.floor(Math.random() * 3);
         let arr = [Rock, Scissors, Paper];
@@ -141,19 +145,6 @@ class Scissors {
         } else {
             return "loss";
         }
-    }
-
-    static checkOutcomeMessageAgainst(oponentsPick) {
-        if (oponentsPick === this) {
-            return "It's a draw! You both picked Scissors.";
-        }
-        for (let rule of rules) {
-            const ruleLower = rule.toLowerCase();
-            if (ruleLower.includes(this.name) && ruleLower.includes(oponentsPick.name)) {
-                return rule;
-            }
-        }
-        return undefined;
     }
 
     static getCheat() {
@@ -177,19 +168,6 @@ class Lizard {
         }
     }
 
-    static checkOutcomeMessageAgainst(oponentsPick) {
-        if (oponentsPick === this) {
-            return "It's a draw! You both picked Lizard.";
-        }
-        for (let rule of rules) {
-            const ruleLower = rule.toLowerCase();
-            if (ruleLower.includes(this.name) && ruleLower.includes(oponentsPick.name)) {
-                return rule;
-            }
-        }
-        return undefined;
-    }
-
     static getCheat() {
         let number = Math.floor(Math.random() * 3);
         let arr = [Spock, Scissors, Lizard];
@@ -209,19 +187,6 @@ class Spock {
         } else {
             return "loss";
         }
-    }
-
-    static checkOutcomeMessageAgainst(oponentsPick) {
-        if (oponentsPick === this) {
-            return "It's a draw! You both picked Spock.";
-        }
-        for (let rule of rules) {
-            const ruleLower = rule.toLowerCase();
-            if (ruleLower.includes(this.name) && ruleLower.includes(oponentsPick.name)) {
-                return rule;
-            }
-        }
-        return undefined;
     }
 
     static getCheat() {
@@ -278,7 +243,6 @@ class ComputerPlayer {
 }
 /* Game contains the game logic. */
 class Game {
-
     static numberOfRoundsSetting = 3; // Default setting
     // The number of rounds left to play
     static roundsLeft = this.numberOfRoundsSetting;
@@ -311,12 +275,10 @@ class Game {
             this.computerPlayer.pickRandom();
         }
 
-
-
         // Check the outcome of the move made by the player
         result = this.userPlayer.pick.checkOutcomeAgainst(this.computerPlayer.pick);
         // The corresponding message that explains the outcome
-        result_message = this.userPlayer.pick.checkOutcomeMessageAgainst(this.computerPlayer.pick);
+        result_message = GameResult.checkOutcomeMessageAgainst(this.userPlayer.pick, this.computerPlayer.pick);
         // Get the image that explains the outcome. The return value is the name of the image file
         // that will be displayed in the outcome panel. Or undefined if the outcome is a draw.
         // No image will be displayed in the outcome panel.
@@ -382,8 +344,6 @@ class View {
         "computer-paper-button", "computer-scissors-button",
         "computer-lizard-button", "computer-spock-button"
     ];
-
-
 
 
     // Applies changes to the html document to show the outcome of the current round
@@ -571,18 +531,6 @@ class View {
         return val;
     }
 }
-
-function testAPick() {
-    let pick = Rock;
-    let oponentsPick = Scissors;
-    pick.checkOutcomeAgainst(oponentsPick);
-    let outcomeMessage = pick.checkOutcomeMessageAgainst(oponentsPick);
-    console.log(outcomeMessage);
-    console.log("Testing pick: " + pick.name);
-}
-
-testAPick();
-console.log("Test completed.");
 
 // Initialize global objects
 // The game object is initialized with 3 rounds as initial setting
