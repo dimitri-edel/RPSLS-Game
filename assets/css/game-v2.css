@@ -41,7 +41,7 @@ h1 {
     width: 320px;
     height: 430px;
     margin: 0 auto;
-    background-color:#e0cde1;
+    background-color: #e0cde1;
     background-size: cover;
     overflow: hidden;
     font-family: 'Orbitron', sans-serif;
@@ -144,9 +144,11 @@ h1 {
     position: relative;
     margin: auto auto;
     border-radius: 50%;
-    object-fit: cover; /* ensures the image covers the circle area */    
+    object-fit: cover;
+    /* ensures the image covers the circle area */
     border: 5px solid rgba(0, 0, 0, 0.5);
-    box-shadow: 0 4px 16px rgba(0,0,0,0.3); /* Shadow effect */
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.3);
+    /* Shadow effect */
 }
 
 /* This element harbors the image what the computer has picked */
@@ -172,15 +174,19 @@ h1 {
     font-size: 20px;
     text-align: center;
     width: 180px;
-    height: 180px;              /* Make it a perfect circle */
-    border-radius: 50%;         /* Fully rounded */
+    height: 180px;
+    /* Make it a perfect circle */
+    border-radius: 50%;
+    /* Fully rounded */
     background-color: rgba(255, 255, 255, 0.5);
     border: 5px solid rgba(0, 0, 0, 0.5);
-    box-shadow: 0 4px 16px rgba(0,0,0,0.3); /* Shadow effect */
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.3);
+    /* Shadow effect */
     display: flex;
     align-items: center;
     justify-content: center;
 }
+
 /* This element harbors the image of what the user has picked */
 #user-pick-image-panel {
     position: relative;
@@ -289,10 +295,17 @@ h1 {
 
 /* The border around the #user-option-panel */
 .gray-border {
-    border: 10px solid transparent;
-    border-image: url(../images/webp/panel-gray-border.webp) 20 round;
+    border-top: 4px solid transparent;
+    background: linear-gradient(to bottom, #bbb 0%, #fff 100%);
 }
 
+.player-option-picker {
+    width: 300px !important;
+    text-align: center;
+    border: 2px solid #ccc;
+    border-radius: 10px;
+    background-image: linear-gradient(to bottom, #bcbcbc, #fcfcfc);
+}
 /* ############################################################################ */
 /* BUTTONS OF OPTIONS FROM WHICH THE USER CAN PICK THEIR MOVE                   */
 /* ############################################################################ */
@@ -356,30 +369,9 @@ h1 {
     z-index: 1;
 }
 
-/* Transparent image that will be displayed on top of the #user-paper-button-image  on hover */
-#user-paper-button-image-gray {
-    display: none;
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 50px;
-    height: 50px;
-    z-index: 2;
-}
-
-/* Highlight the button when the mouse hovers over it */
-#user-paper-button:hover #user-paper-button-image-gray {
-    display: inline;
-}
-
 /* Move the image a few pixels down when user clicks on the button */
 #user-paper-button:active {
     transform: translateY(5px);
-}
-
-/* Move the image a few pixels down when user clicks on the button */
-#user-paper-button:active #user-paper-button-image-gray {
-    display: inline;
 }
 
 /* Container for the button with the image of scissors */
@@ -399,30 +391,9 @@ h1 {
     z-index: 1;
 }
 
-/* Transparent image that will be displayed on top of the #user-scissors-button-image  on hover */
-#user-scissors-button-image-gray {
-    display: none;
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 50px;
-    height: 50px;
-    z-index: 2;
-}
-
-/* Highlight the button when the mouse hovers over it */
-#user-scissors-button:hover #user-scissors-button-image-gray {
-    display: inline;
-}
-
 /* Move the image a few pixels down when user clicks on the button */
 #user-scissors-button:active {
     transform: translateY(5px);
-}
-
-/* Move the image a few pixels down when user clicks on the button */
-#user-scissors-button:active #user-scissors-button-image-gray {
-    display: inline;
 }
 
 /* Container for the button with the image of a lizard */
@@ -442,30 +413,9 @@ h1 {
     z-index: 1;
 }
 
-/* Transparent image that will be displayed on top of the #user-lizard-button-image  on hover */
-#user-lizard-button-image-gray {
-    display: none;
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 50px;
-    height: 50px;
-    z-index: 2;
-}
-
-/* Highlight the button when the mouse hovers over it */
-#user-lizard-button:hover #user-lizard-button-image-gray {
-    display: inline;
-}
-
 /* Move the image a few pixels down when user clicks on the button */
 #user-lizard-button:active {
     transform: translateY(5px);
-}
-
-/* Move the image a few pixels down when user clicks on the button */
-#user-lizard-button:active #user-lizard-button-image-gray {
-    display: inline;
 }
 
 /* Container for the button with the image of commander Spock */
@@ -485,30 +435,9 @@ h1 {
     z-index: 1;
 }
 
-/* Transparent image that will be displayed on top of the #user-lizard-button-image  on hover */
-#user-spock-button-image-gray {
-    display: none;
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 50px;
-    height: 50px;
-    z-index: 2;
-}
-
-/* Highlight the button when the mouse hovers over it */
-#user-spock-button:hover #user-spock-button-image-gray {
-    display: inline;
-}
-
 /* Move the image a few pixels down when user clicks on the button */
 #user-spock-button:active {
     transform: translateY(5px);
-}
-
-/* Move the image a few pixels down when user clicks on the button */
-#user-spock-button:active #user-spock-button-image-gray {
-    display: inline;
 }
 
 /* Move the text across the screen from right to left until it disapears beyond the left margin */
@@ -2572,6 +2501,7 @@ h1 {
         width: 150px;
         height: 150px;
     }
+
     /* The text 'VS.' that sits between the image of what the computer has picked and the image of whtat the user has picked */
     #versus-text {
         width: 150px;
@@ -2853,7 +2783,7 @@ h1 {
 
     /* The text 'VS.' that sits between the image of what the computer has picked and the image of whtat the user has picked */
     #versus-text {
-        font-size: 30px;        
+        font-size: 30px;
     }
 
     /* This element harbors the image of what the user has picked */
