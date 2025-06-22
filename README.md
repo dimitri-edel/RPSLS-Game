@@ -2,10 +2,13 @@
 
 
 # Rock, Paper, Scissors, Lizard, Spock Version #2
-## Introduction
-The first version was written when I knew virtually nothing about JavaScript. So, I decided to go ahead and see if I can redesign it, as in simplify it.
+
+## First Version
+The first version when I was just beginning to learn about JavaScript.
+[First Version Repository](https://github.com/dimitri-edel/pp2)
  
-### ISSUES
+## What is different in this Version
+The main purpose of this version was to refactor the code and hopefully make it easier to understand. The classes and there methods remained the same, for the most part.
 
 #### MEDIA RESPONSIVE DESIGN
 I have tried to cover all the devices that Chrome's dev tools had to offer. Since I am on the fast track schedule there simply was not enough time to cover them all **perfectly**. So I implemented a few generic queries that cover a range of devices. The method is to divy up the devices into groups of simple dimensions. Then simply use the group's minimum required width and the minimum required height for dimensions. 

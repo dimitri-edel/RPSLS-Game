@@ -362,7 +362,7 @@ class View {
             document.getElementById("computer-pick-image").src = "./assets/images/webp/" + game.computerPlayer.pick.imageFileName;
             document.getElementById("computer-pick-image").style = "display:block;";
             document.getElementById("outcome-image").style = "display:none;";
-            document.getElementById("versus-text").style = "display:block;";
+            document.getElementById("versus-text").style = "display:flex;";
         } else {
             document.getElementById("outcome-image").src = "./assets/images/" + outcome_image;
             document.getElementById("outcome-image").style = "display:block;";
@@ -419,7 +419,7 @@ class View {
         document.getElementById("outcome-image").style = "display:none;";
         document.getElementById("settings-panel").style = "display:block;";
         document.getElementById("rounds-counter-panel").style = "display:none;";
-        document.getElementById("versus-text").style = "display:block;";
+        document.getElementById("versus-text").style = "display:flex;";
     }
 
     // Is triggered when the 'home' icon is clicked
