@@ -153,6 +153,10 @@ h1 {
 
 /* This element harbors the image what the computer has picked */
 #computer-pick-image-panel {
+    border-top: 1px inset black;
+    border-left: 1px inset black;
+    border-bottom: 1px inset white;
+    border-right: 1px inset white;
     position: relative;
     margin-left: 50px;
     margin: 0 auto;
@@ -189,6 +193,10 @@ h1 {
 
 /* This element harbors the image of what the user has picked */
 #user-pick-image-panel {
+    border-top: 1px inset black;
+    border-left: 1px inset black;
+    border-bottom: 1px inset white;
+    border-right: 1px inset white;
     position: relative;
     margin: 0 auto;
     width: 100px;
@@ -255,6 +263,7 @@ h1 {
     height: 50px;
     object-fit: contain;
     margin: 0 auto;
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.3);    
 }
 
 /* Container for the home button icon */
@@ -263,7 +272,7 @@ h1 {
     margin-bottom: 0;
     margin-left: 10px;
     margin-right: auto;
-    text-align: center;
+    text-align: center;    
 }
 
 /* Image of the home button icon */
@@ -275,6 +284,7 @@ h1 {
     height: 50px;
     object-fit: contain;
     margin: 0 auto;
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.3);    
 }
 
 /*------------------------------------------------------------------------------------------- */
