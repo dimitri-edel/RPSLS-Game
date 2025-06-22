@@ -139,10 +139,14 @@ h1 {
 #outcome-image {
     display: none;
     width: auto;
-    height: 60%;
-    position: relative;  
-    margin: auto auto;   
+    height: 70%;
+    position: relative;
+    margin: auto auto;
+    border-radius: 50%;
+    object-fit: cover;
+    /* ensures the image covers the circle area */
 }
+
 /* This element harbors the image what the computer has picked */
 #computer-pick-image-panel {
     position: relative;
