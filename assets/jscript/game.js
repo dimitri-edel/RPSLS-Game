@@ -57,22 +57,6 @@ class GameResult {
     }
 }
 
-function getOutcomeImageFor(player, computer) {
-    // If openent picked the same pick
-    if (computer === player) {
-        return undefined;
-    }
-    for (let image of outcome_images) {
-        // Remove underscores and replace with spaces
-        const imageName = image.replace(/_/g, " ");
-        // If the image name contains both picks, return the image name
-        if (imageName.includes(player.name) && imageName.includes(computer.name)) {
-            return image;
-        }
-    }
-    return undefined;
-}
-
 // The following messages will be displayed at the top of the page. These are motivational phrases.
 const starting_message = "Welcome! May the force be with you!";
 const winning_message = "You are winning! Keep going!";
@@ -282,7 +266,7 @@ class Game {
         // Get the image that explains the outcome. The return value is the name of the image file
         // that will be displayed in the outcome panel. Or undefined if the outcome is a draw.
         // No image will be displayed in the outcome panel.
-        let outcomeImage = getOutcomeImageFor(this.userPlayer.pick, this.computerPlayer.pick);
+        let outcomeImage = GameResult.getOutcomeImageFor(this.userPlayer.pick, this.computerPlayer.pick);
         // Asign score
         if (result === "win") {
             this.userPlayer.increaseScore();
@@ -540,3 +524,5 @@ let view = View;
 view.hookUpOptionPickerEventListeners();
 // Set the initial message to the #message-display
 document.getElementById("message-display").innerHTML = starting_message;
+// It is necessary to intialize the computer player with a random pick
+game.computerPlayer.pickRandom();
