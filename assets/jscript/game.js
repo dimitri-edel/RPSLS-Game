@@ -422,8 +422,10 @@ class View {
         } else {
             document.getElementById("outcome-image").src = "./assets/images/" + outcome_image;
             document.getElementById("outcome-image").style = "display:block;";
-            document.getElementById("user-pick-image").style = "display:none;";
-            document.getElementById("computer-pick-image").style = "display:none;";
+            document.getElementById("user-pick-image").style = "display:block;";
+            document.getElementById("user-pick-image").src = "./assets/images/webp/" + game.userPlayer.pick.imageFileName;
+            document.getElementById("computer-pick-image").style = "display:block;";
+            document.getElementById("computer-pick-image").src = "./assets/images/webp/" + game.computerPlayer.pick.imageFileName;
             document.getElementById("versus-text").style = "display:none;";
         }
         if (game.roundsLeft > 0) {
