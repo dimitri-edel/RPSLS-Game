@@ -88,9 +88,14 @@ classDiagram
         <<static>> updateScore()
         <<static>> getNumberOfRoundsSetting()
     }
+    class GameResult {
+        <<static>> getOutcomeImageFor(player, computer)
+        <<static>> checkOutcomeMessageAgainst(player, computer)
+    }
     Game --> Player : uses
     Game --> ComputerPlayer : uses
     Game --> View : uses
+    Game --> GameResult : uses
     View --> Game : calls methods
     Player <.. Rock : uses
     Player <.. Paper : uses
